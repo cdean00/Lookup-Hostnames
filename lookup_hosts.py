@@ -17,6 +17,8 @@ def main(args):
                     hostname, aliaslist, ip = socket.gethostbyname_ex(host.strip())
                 except socket.gaierror:
                     ip = 'Unable to resolve'
+                except socket.herror as e:
+                    print(e)
 
                 csvwriter.writerow([hostname, aliaslist, ip])
 
