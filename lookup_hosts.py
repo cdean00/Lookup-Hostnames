@@ -4,10 +4,10 @@ import time
 from argparse import ArgumentParser
 
 def main(args):
-    with open('hosts.csv', 'w') as csvfile:
+    with open('hostnames.csv', 'w') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter=',', lineterminator='\n')
 
-        with open(args.hostname_file, 'r') as hostnames:
+        with open(args.hosts, 'r') as hostnames:
             hostname = ''
             aliaslist = []
             ip = []
@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     # Parse command-line arguments
     parser = ArgumentParser()
-    parser.add_argument('hosts_filename', help='Name of text file that contains single column of hostnames to be looked up.')
+    parser.add_argument('hosts', help='Name of text file that contains single column of hostnames to be looked up.')
 
     args = parser.parse_args()
 
