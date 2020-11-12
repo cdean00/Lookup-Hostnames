@@ -15,14 +15,13 @@ def main(args):
             for host in hostnames:
                 try:
                     hostname, aliaslist, ip = socket.gethostbyname_ex(host.strip())
-                    csvwriter.writerow([hostname, aliaslist, ip])
+                    csvwriter.writerow([hostname, aliaslist, ip[0]])
                     print(hostname)
                 except socket.gaierror:
                     ip = 'Unable to resolve'
+                    csvwriter.writerow([host, aliaslist, ip])
                 except socket.herror as e:
                     print(e)
-
-                csvwriter.writerow([hostname, aliaslist, ip])
 
 if __name__ == '__main__':
 
