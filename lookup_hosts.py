@@ -13,24 +13,27 @@ def main(args):
             ip = []
 
             for host in hostnames:
+                host = host.strip()
                 if args.ip:
                     try:
-                        hostname, aliaslist, ip = socket.gethostbyaddr(host.strip())
-                        csvwriter.writerow([hostname, aliaslist, ip[0]])
-                        print(hostname)
+                        hostname, aliaslist, ip = socket.gethostbyaddr(host)
+                        csvwriter.writerow([host, hostname, ip[0]])
+                        print(hostname + '-' + ip[0])
                     except socket.gaierror:
                         ip = 'Unable to resolve'
-                        csvwriter.writerow([host, aliaslist, ip])
+                        csvwriter.writerow([host, hostname, ip[0]])
+                        print(hostname + '-' + ip[0])
                     except socket.herror as e:
                         print(e)
                 else:
                     try:
-                        hostname, aliaslist, ip = socket.gethostbyname_ex(host.strip())
-                        csvwriter.writerow([hostname, aliaslist, ip[0]])
-                        print(hostname)
+                        hostname, aliaslist, ip = socket.gethostbyname_ex(host)
+                        csvwriter.writerow([host, hostname, ip[0]])
+                        print(hostname + '-' + ip[0])
                     except socket.gaierror:
                         ip = 'Unable to resolve'
-                        csvwriter.writerow([host, aliaslist, ip])
+                        csvwriter.writerow([host, hostname, ip])
+                        print(hostname + '-' + ip[0])
                     except socket.herror as e:
                         print(e)
 
